@@ -1,16 +1,27 @@
 import axios from 'axios';
 
-const API_KEY =
-  'live_qBHR7y42oE1SWcDnf4W5Za8V1NMkVClA7pJDhiNv9v66pXQBCQuBx62O18yVldAz';
+const BASE_URL = 'https://api.thecatapi.com/v1';
 
-axios.defaults.headers.common['x-api-key'] = API_KEY;
-axios.defaults.baseURL = 'https://api.thecatapi.com/v1/breeds';
-
-export function fetchBreeds() {
+function fetchBreeds() {
   return axios
-    .get()
-    .then(response => response.data)
-    .catch(err => error(err));
+    .get(`${BASE_URL}/breeds`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      throw new Error('Помилка запиту:', error.message);
+    });
 }
 
-export function fetchCatByBreed(breedId) {}
+function fetchCatByBreed(breedId) {
+  return axios
+    .get(`${BASE_URL}/images/search?breed_ids=${breedId}`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      throw new Error('Помилка запиту:', error.message);
+    });
+}
+
+export { fetchBreeds, fetchCatByBreed };
