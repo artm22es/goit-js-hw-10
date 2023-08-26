@@ -22,7 +22,7 @@ function createCatList() {
   fetchBreeds()
     .then(data => {
       const optionsList = data
-        .map(({ id, name }) => ` <option value="${id}">${name}</option>`)
+        .map(({ id, name }) => `<option value="${id}">${name}</option>`)
         .join(' ');
 
       selectCat.innerHTML = optionsList;
@@ -61,7 +61,7 @@ function onSelectChange(evt) {
 function renderMarkupInfo(data) {
   const { breeds, url } = data[0];
   const { name, temperament, description } = breeds[0];
-  const beerdCard = `<img class="pfoto-cat" width = "300px" src="${url}" alt="${name}">
+  const beerdCard = `<img class="foto-cat" width = "300px" src="${url}" alt="${name}">
     <div class="text-part">
   <h2 class="name-cat">${name}</h2>
   <p class="deskr-cat">${description}</p>
